@@ -43,7 +43,6 @@ This project provides bash automation for deploying KVM virtual machines using c
       Select `basic-vm` from the menu and follow the prompts.
 
     **(Option B) Basic VM with SSH key authentication**  
-      **Configure authentication**  
       Edit `basic-vm-ssh-key/vm_config.yaml`:  
       Replace `YOUR_PUBLIC_KEY_HERE` with your actual SSH public key
       ```bash
