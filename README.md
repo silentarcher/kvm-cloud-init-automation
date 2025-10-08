@@ -30,7 +30,7 @@ This project provides bash automation for deploying KVM virtual machines using c
 
 1. **Clone the repository**
    ```bash
-   git clone https://github.com/YOUR_USERNAME/kvm-cloud-init-automation.git
+   git clone https://github.com/silentarcher/kvm-cloud-init-automation.git
    cd kvm-cloud-init-automation
    ```
 
@@ -43,11 +43,11 @@ This project provides bash automation for deploying KVM virtual machines using c
       Select `basic-vm` from the menu and follow the prompts.
 
     **(Option B) Basic VM with SSH key authentication**  
-      Edit `basic-vm-ssh-key/vm_config.yaml`:  
+      Edit `./examples/basic-vm-ssh-key/vm_config.yaml`:  
       Replace `YOUR_PUBLIC_KEY_HERE` with your actual SSH public key
       ```bash
       cat ~/.ssh/id_ed25519.pub  # Copy this
-      vim examples/ubuntu-server/vm_config.yaml  # Paste into ssh_authorized_keys
+      vim ./examples/basic-vm-ssh-key/vm_config.yaml  # Paste into ssh_authorized_keys
       sudo ./install_kvm_guest.sh
       ```
       Select `basic-vm-ssh-key` from the menu and follow the prompts.
