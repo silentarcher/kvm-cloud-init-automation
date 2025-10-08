@@ -34,26 +34,30 @@ This project provides bash automation for deploying KVM virtual machines using c
    cd kvm-cloud-init-automation
    ```
 
-2. **Configure authentication**
+2. **Deploy a VM**  
+   
+    **(Option A) Basic VM with password authentication**  
+      ```bash
+      sudo ./install_kvm_guest.sh
+      ```
+      Select `basic-vm` from the menu and follow the prompts.
 
-   Edit the example config and choose one:
-   - **Option A (SSH key)**: Replace `YOUR_PUBLIC_KEY_HERE` with your actual SSH public key
-     ```bash
-     cat ~/.ssh/id_ed25519.pub  # Copy this
-     nano examples/ubuntu-server/vm_config.yaml  # Paste into ssh_authorized_keys
-     ```
-   - **Option B (Password only)**: Remove the `ssh_authorized_keys` field entirely
+    **(Option B) Basic VM with SSH key authentication**  
+      **Configure authentication**  
+      Edit `basic-vm-ssh-key/vm_config.yaml`:  
+      Replace `YOUR_PUBLIC_KEY_HERE` with your actual SSH public key
+      ```bash
+      cat ~/.ssh/id_ed25519.pub  # Copy this
+      vim examples/ubuntu-server/vm_config.yaml  # Paste into ssh_authorized_keys
+      sudo ./install_kvm_guest.sh
+      ```
+      Select `basic-vm-ssh-key` from the menu and follow the prompts.
 
-3. **Deploy a VM**
-   ```bash
-   sudo ./install_kvm_guest.sh
-   ```
-   Select a configuration from the menu and follow the prompts.
-
-4. **Remove a VM** (when needed)
+3. **Remove a VM** (when needed)
    ```bash
    sudo ./remove_kvm_guest.sh
    ```
+   Select the vm name for removal and follow the prompts.
 
 ## Configuration
 
