@@ -1,0 +1,35 @@
+meta-data:
+  instance-id: basic-vm
+  local-hostname: basic-vm
+
+img_source: "https://cloud.debian.org/images/cloud/bookworm/latest/debian-12-generic-amd64.qcow2"
+redownload_img: false
+disk_size: "20G"
+ram: "1024"
+vcpus: "1"
+os_variant: "debian12"
+
+network-config:
+  version: 2
+  ethernets:
+    enp1s0:
+      network: "default"
+      dhcp4: true
+
+user-data:
+  users:
+    - name: admin
+      groups: sudo
+      shell: /bin/bash
+      sudo:
+        - "ALL=(ALL) ALL"
+      lock_passwd: false
+      passwd: true
+
+  packages:
+    - qemu-guest-agent
+
+  runcmd:
+    - echo "\e[1;4;34mStarting qemu-guest-agent...\e[0m"
+    - systemctl start qemu-guest-agent
+    - echo "\e[1;4;32mFinished starting qemu-guest-agent.\e[0m"
