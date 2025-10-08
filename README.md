@@ -147,8 +147,8 @@ network-config:
       gateway4: 192.0.2.1
       nameservers:
         addresses:
-          - 1.1.1.1
-          - 1.0.0.1
+          - 9.9.9.9
+          - 149.112.112.112
 ```
 
 ### Multi-instance Deployment
