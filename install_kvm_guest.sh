@@ -222,6 +222,10 @@ EOF
     ssh_authorized_keys:
       - ${SSH_KEY}
 EOF
+        # Add disable_root if present in config
+        DISABLE_ROOT=$(yq e '.user-data.disable_root' "$CONFIG_FILE")
+        if [ "$DISABLE_ROOT" != "null" ]; then
+            echo "disable_root: ${DISABLE_ROOT}" >> $USER_DATA_PATH
         fi
 
         # Continue with remaining user config
@@ -279,6 +283,14 @@ $(yq e '.user-data.packages[] | "  - \(.)"' "$CONFIG_FILE")
 runcmd:
 $(yq e '.user-data.runcmd[] | "  - \(.)"' "$CONFIG_FILE")
 EOF
+
+        # Check for additional files in local cloud-init directory
+        if [ -d "cloud-init" ]; then
+            echo "Found local cloud-init directory, copying additional files..."
+            # Copy any additional files (excluding the standard cloud-init files we just created)
+            find cloud-init -type f ! -name "meta-data" ! -name "user-data" ! -name "network-config" -exec cp {} "$CLOUD_INIT_DIR/" \;
+            echo "Additional files copied to cloud-init directory."
+        fi
 
         # Create cloud-init iso from files in the /cloud-init/<VM_NAME> directory
         echo "Creating cloud-init ISO..."
